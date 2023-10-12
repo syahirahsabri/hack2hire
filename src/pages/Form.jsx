@@ -40,7 +40,7 @@ export default function Form() {
   const selectedOption = chooseOption6;
 
   return (
-    <div className='p-4 rounded-md shadow-xl'>
+    <div className="bg-white p-4 rounded-md border border-gray-300 shadow-lg">
       <form>
         <div className='mb-4'>
           <label className='mr-2'>Name:</label>
