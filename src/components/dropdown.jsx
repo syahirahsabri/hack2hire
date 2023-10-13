@@ -6,12 +6,18 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ');
 }
 
-export const DropDown = ({ title, options, chooseOption }) => {
-    const [selected, setSelected] = useState(options[chooseOption]);
+export const DropDown = ({ title, options, selectedOption, onDropdownChange }) => {
+    const handleChange = (selectedValue) => {
+        const selectedOptionIndex = options.findIndex(option => option.id === selectedValue.id);
+        onDropdownChange(selectedOptionIndex);
+        console.log(selectedOptionIndex)
+    }
+
+    const selected = options[selectedOption];
 
     return (
         <div className='w-[70%] mr-14'>
-            <Listbox value={selected} onChange={setSelected}>
+            <Listbox value={selected} onChange={handleChange}>
                 {({ open }) => (
                     <>
                         <Listbox.Label className="block text-sm font-medium leading-6 text-gray-900"><b>{title}</b></Listbox.Label>

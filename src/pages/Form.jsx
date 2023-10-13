@@ -1,5 +1,6 @@
 import { QuantityInput } from "../components/quantityInput";
 import { DropDown } from "../components/dropdown"
+import { useState } from "react";
 
 const electricalAppliances = [
   {
@@ -30,14 +31,21 @@ const electricalAppliances = [
 
 export default function Form() {
 
-  const chooseOption1 = 0;
-  const chooseOption2 = 1;
-  const chooseOption3 = 2;
-  const chooseOption4 = 3;
-  const chooseOption5 = 4;
-  const chooseOption6 = 5;
+  const [selectedOptions, setSelectedOptions] = useState({
+    dropdown1: 0,
+    dropdown2: 1,
+    dropdown3: 2,
+    dropdown4: 3,
+    dropdown5: 4,
+    dropdown6: 5,
+  });
 
-  const selectedOption = chooseOption6;
+  const handleDropdownChange = (dropdownName, optionIndex) => {
+    setSelectedOptions((prevState) => ({
+      ...prevState,
+      [dropdownName]: optionIndex,
+    }));
+  };
 
   return (
     <div className="bg-white p-4 rounded-md border border-gray-300 shadow-xl">
@@ -51,61 +59,112 @@ export default function Form() {
         
         <div className='flex flex-col justify-between gap-y-6'>
           <div className='mr-14'>
-            <DropDown title="Electrical Appliances" options={electricalAppliances} chooseOption={chooseOption1} />
+            <DropDown
+            title="Electrical Appliances"
+            options={electricalAppliances}
+            selectedOption={selectedOptions.dropdown1}
+            onDropdownChange={(optionIndex) =>
+              handleDropdownChange("dropdown1", optionIndex)
+            }
+            />
           </div>
           <div>
-            <QuantityInput level1="20" level2="10" level3="6" />
+            <QuantityInput
+              level1="20"
+              level2="10"
+              level3="6"
+              showLevels={selectedOptions.dropdown1 !== 5}
+            />
           </div>
 
           <div className='mr-14'>
-            <DropDown options={electricalAppliances} chooseOption={chooseOption2} />
+            <DropDown
+              options={electricalAppliances}
+              selectedOption={selectedOptions.dropdown2}
+              onDropdownChange={(optionIndex) =>
+                handleDropdownChange("dropdown2", optionIndex)
+              }
+            />
           </div>
           <div>
-            <QuantityInput level1="40" level2="30" level3="20" />
+            <QuantityInput
+              level1="40"
+              level2="30"
+              level3="20"
+              showLevels={selectedOptions.dropdown2 !== 5}
+            />
           </div>
 
           <div className='mr-14'>
-            <DropDown options={electricalAppliances} chooseOption={chooseOption3} />
+            <DropDown
+              options={electricalAppliances}
+              selectedOption={selectedOptions.dropdown3}
+              onDropdownChange={(optionIndex) =>
+                handleDropdownChange("dropdown3", optionIndex)
+              }
+            />
           </div>
           <div>
-            <QuantityInput level1="5" level2="5" level3="5" />
+            <QuantityInput
+              level1="5"
+              level2="5"
+              level3="5"
+              showLevels={selectedOptions.dropdown3 !== 5}
+            />
           </div>
 
           <div className='mr-14'>
-            <DropDown options={electricalAppliances} chooseOption={chooseOption4} />
+            <DropDown
+              options={electricalAppliances}
+              selectedOption={selectedOptions.dropdown4}
+              onDropdownChange={(optionIndex) =>
+                handleDropdownChange("dropdown4", optionIndex)
+              }
+            />
           </div>
           <div>
-            <QuantityInput level1="5" level2="20" level3="28" />
+            <QuantityInput
+              level1="5"
+              level2="20"
+              level3="3"
+              showLevels={selectedOptions.dropdown4 !== 5}
+            />
           </div>
 
           <div className='mr-14'>
-            <DropDown options={electricalAppliances} chooseOption={chooseOption5} />
+            <DropDown
+              options={electricalAppliances}
+              selectedOption={selectedOptions.dropdown5}
+              onDropdownChange={(optionIndex) =>
+                handleDropdownChange("dropdown5", optionIndex)
+              }
+            />
           </div>
           <div>
-            <QuantityInput level1="4" level2="4" level3="2" />
+            <QuantityInput
+              level1="4"
+              level2="4"
+              level3="2"
+              showLevels={selectedOptions.dropdown5 !== 5}
+            />
           </div>
 
           <div className='mr-14'>
-            <DropDown options={electricalAppliances} chooseOption={chooseOption6} />
+            <DropDown
+              options={electricalAppliances}
+              selectedOption={selectedOptions.dropdown6}
+              onDropdownChange={(optionIndex) =>
+                handleDropdownChange("dropdown6", optionIndex)
+              }
+            />
           </div>
           <div>
-            <label><b>Quantity</b></label> <br/>
-            <div className='mt-2'>
-              <label htmlFor="level_1" className='mr-2'>Level 1:</label>
-              <input name="level_1" id="level_1" className='w-[30%] h-8' type='text' defaultValue='3' />
-            </div>
-            {selectedOption !== chooseOption6 && (
-              <div>
-                <div className='mt-2'>
-                  <label htmlFor="level_2" className='mr-2'>Level 2:</label>
-                  <input name="level_2" id="level_2" className='w-[30%] h-8' type='text' defaultValue='20' />
-                </div>
-                <div className='mt-2'>
-                  <label htmlFor="level_3" className='mr-2'>Level 3:</label>
-                  <input name="level_3" id="level_3" className='w-[30%] h-8' type='text' defaultValue='20' />
-                </div>
-              </div>
-            )}
+            <QuantityInput
+              level1="3"
+              level2="3"
+              level3="3"
+              showLevels={selectedOptions.dropdown6 !== 5}
+            />
           </div>
         </div>
 
