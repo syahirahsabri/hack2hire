@@ -1,22 +1,20 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import "./App.css";
 
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 import Dashboard from "./pages/Dashboard.jsx";
 import Form from "./pages/Form";
 import LandingPage from "./pages/LandingPage";
+import Calculator from "./pages/Calculator";
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/Form" element={<Form />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/home" element={<LandingPage />} />
+          <Route path="/form" element={<Form />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/calculator" element={<Calculator />} />
         </Routes>
       </BrowserRouter>
     </>
