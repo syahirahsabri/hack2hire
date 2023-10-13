@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./App.css";
 
 import Dashboard from "./pages/Dashboard.jsx";
-import Form from "./pages/Form";
-import LandingPage from "./pages/LandingPage";
-import Calculator from "./pages/Calculator";
+import Form from "./pages/Form.jsx";
+import LandingPage from "./pages/LandingPage.jsx";
+import Calculator from "./pages/Calculator.jsx";
 
 export default function App() {
   return (
