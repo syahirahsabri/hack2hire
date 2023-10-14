@@ -34,42 +34,41 @@ const defaultValue = 3;
 function calculateTotalPowerConsumption(
   dropdownConfigs,
   electricalConsumption,
-  defaultValue
+  hoursArray
 ) {
   if (
     !Array.isArray(dropdownConfigs) ||
-    !Array.isArray(electricalConsumption)
+    !Array.isArray(electricalConsumption) ||
+    !Array.isArray(hoursArray)
   ) {
     console.error("Invalid data format. Arrays are expected.");
-    console.log(dropdownConfigs);
-    return "Tak dapat value"; // Return 0 or handle the error as needed
+    return "Invalid data format"; // Return 0 or handle the error as needed
   }
 
   const totalUnitsByComponent = {};
   let totalPowerConsumption = 0;
 
-  dropdownConfigs.forEach((config) => {
+  dropdownConfigs.forEach((config, index) => {
     const componentTitle = config.title;
     totalUnitsByComponent[componentTitle] = 0;
 
     config.levels.forEach((level) => {
       totalUnitsByComponent[componentTitle] += parseInt(level, 10);
     });
+
+    const power = parseFloat(electricalConsumption[index].power);
+    const units = totalUnitsByComponent[componentTitle];
+    totalPowerConsumption += power * units * hoursArray[index];
   });
 
-  electricalConsumption.forEach((item) => {
-    const componentTitle = item.title;
-    if (totalUnitsByComponent[componentTitle]) {
-      const power = parseFloat(item.power);
-      const units = totalUnitsByComponent[componentTitle];
-      totalPowerConsumption += power * units * defaultValue;
-    }
-  });
+  console.log('Total Units by Component:', totalUnitsByComponent);
+  console.log('Hours Array:', hoursArray);
 
   return totalPowerConsumption;
 }
 
-function QuantityInput({ level1, level2, level3, showLevels }) {
+
+function QuantityInput({ level1, level2, level3, showLevels, onInputChange }) {
   const [hoursUsed, setHoursUsed] = useState(0);
 
   const handleInputChange = (e) => {
@@ -187,6 +186,15 @@ export default function Form() {
     dropdown6: 5,
   });
 
+  const [hoursUsed, setHoursUsed] = useState({
+    dropdown1: 0,
+    dropdown2: 0,
+    dropdown3: 0,
+    dropdown4: 0,
+    dropdown5: 0,
+    dropdown6: 0,
+  });
+
   const handleDropdownChange = (dropdownName, optionIndex) => {
     setSelectedOptions((prevState) => ({
       ...prevState,
@@ -194,9 +202,25 @@ export default function Form() {
     }));
   };
 
+  const handleHoursChange = (dropdownName, hours) => {
+    setHoursUsed((prevState) => ({
+      ...prevState,
+      [dropdownName]: hours,
+    }));
+  };
+
   const handleCalculator = () => {
-    
-  }
+    const hoursArray = Object.values(hoursUsed).map((hours) => parseInt(hours, 10));
+    console.log('Hours Array:', hoursArray); // Log hoursArray
+    const totalPower = calculateTotalPowerConsumption(
+      dropdownConfigs,
+      electricalConsumption,
+      hoursArray
+    );
+  
+    console.log('Total Power Consumption:', totalPower);
+    // Perform other actions if needed
+  };
 
   return (
     <>
@@ -228,7 +252,7 @@ export default function Form() {
           {calculateTotalPowerConsumption(
             dropdownConfigs,
             electricalConsumption,
-            defaultValue
+            Object.values(hoursUsed).map((hours) => parseInt(hours, 10))
           )}
         </form>
       </div>
