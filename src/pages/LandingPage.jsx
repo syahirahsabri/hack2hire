@@ -20,7 +20,7 @@ export default function LandingPage() {
             </p>
             <div className="flex flex-col space-y-8 mt-8 flex items-center justify-center gap-x-6">
               <Link to={"/dashboard"}>
-                <a className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <a className="rounded-md bg-black px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                   View dashboard
                 </a>
               </Link>
