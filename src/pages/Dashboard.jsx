@@ -2,15 +2,16 @@ import { Link } from "react-router-dom";
 
 function PowerBIDashboard() {
   return (
-    <iframe
-      title="Main Dashboard"
-      width="1140"
-      height="541.25"
-      src="https://app.powerbi.com/reportEmbed?reportId=72d4f8fd-e055-4435-ad79-5ef061a549c6&autoAuth=true&ctid=1f551aeb-7ea1-472c-9ac0-09de9bf33051"
-      frameborder="0"
-      allowFullScreen="true"
-      className="flex flex-col items-center justify-center"
-    ></iframe>
+    <>
+      <iframe
+        title="Full Dashboard"
+        width="1140"
+        height="541.25"
+        src="https://app.powerbi.com/reportEmbed?reportId=00ffccd9-4c97-494b-913f-53996629335b&autoAuth=true&ctid=1f551aeb-7ea1-472c-9ac0-09de9bf33051"
+        // frameborder="100"
+        allowFullScreen="true"
+      />
+    </>
   );
 }
 
@@ -32,11 +33,6 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2 lg:w-[50%]">
           {/* First div */}
           <div className="flex max-w-md flex-col items-center justify-center rounded-md border border-[#cdcdcd] p-8">
-            {/* <div className="mb-4 rounded-[4px] bg-[#0b0b1f] px-4 py-1.5">
-              <p className="text-sm font-bold text-white sm:text-sm">
-                Electrical Usage Form
-              </p>
-            </div> */}
             <p className="mb-6 text-base font-light text-[#636262] md:mb-10 lg:mb-12">
               Your current annual electricity usage is
             </p>
@@ -52,11 +48,6 @@ export default function Dashboard() {
 
           {/* Second div */}
           <div className="flex max-w-md flex-col items-center justify-center rounded-md border border-[#cdcdcd] bg-[#f2f2f7] p-8">
-            {/* <div className="mb-8 rounded-[4px] bg-[#0b0b1f] px-4 py-1.5">
-              <p className="text-sm font-bold text-white sm:text-sm">
-                Carbon Emission Calculator
-              </p>
-            </div> */}
             <p className="mb-6 text-base font-light text-[#636262] md:mb-10 lg:mb-12">
               Your current annual carbon emission is
             </p>
@@ -71,7 +62,7 @@ export default function Dashboard() {
           </div>
         </div>
         <a
-          href="/home"
+          href="/"
           className="mb-5 w-[20%] mt-10 py-3 text-center font-semibold text-black md:mb-6 lg:mb-8 hover:bg-white hover:text-black"
         >
           👈🏻 Return to landing

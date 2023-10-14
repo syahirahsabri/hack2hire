@@ -10,7 +10,7 @@ export default function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<LandingPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/form" element={<Form />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/calculator" element={<Calculator />} />
