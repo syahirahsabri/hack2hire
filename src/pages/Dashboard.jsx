@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Prediction from "../components/Prediction.jsx";
 
 function PowerBIDashboard() {
   return (
@@ -21,41 +22,49 @@ export default function Dashboard() {
       <div className="flex flex-col items-center justify-center px-5 py-16 md:px-10 md:py-24 lg:py-32">
         <div className="mb-8 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
           <h2 className="text-3xl font-bold mb-5 md:text-5xl">👩‍💻</h2>
-          <h2 className="text-3xl mb-10 font-bold md:text-5xl">
+          <h2 className="text-3xl mb-5 font-bold md:text-5xl">
             Welcome back, Dell!
           </h2>
+          <div>
+            <Prediction />
+          </div>
           <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
             <PowerBIDashboard />
           </div>
-          {/* <h3 className="text-xl font-bold md:text-3xl">Update data</h3> */}
         </div>
 
         <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2 lg:w-[50%]">
-          {/* First div */}
+          {/* Form div */}
           <div className="flex max-w-md flex-col items-center justify-center rounded-md border border-[#cdcdcd] p-8">
             <p className="mb-6 text-base font-light text-[#636262] md:mb-10 lg:mb-12">
               Your current annual electricity usage is
             </p>
-            <h2 className="mb-5 text-3xl font-bold md:mb-6 md:text-5xl lg:mb-12">
+            <h2 className="mb-5 text-3xl font-semibold md:mb-6 md:text-5xl lg:mb-12">
               RM 10351
             </h2>
             <Link to={"/form"}>
-              <a className="mb-5 w-full rounded-md bg-black px-6 py-3 text-center font-semibold text-white md:mb-6 lg:mb-8">
+              <a
+                className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
+                style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
+              >
                 Update your building info
               </a>
             </Link>
           </div>
 
-          {/* Second div */}
-          <div className="flex max-w-md flex-col items-center justify-center rounded-md border border-[#cdcdcd] bg-[#f2f2f7] p-8">
+          {/* Calculator div */}
+          <div className="flex max-w-md flex-col items-center justify-center rounded-md border border-[#cdcdcd] p-8">
             <p className="mb-6 text-base font-light text-[#636262] md:mb-10 lg:mb-12">
               Your current annual carbon emission is
             </p>
-            <h2 className="mb-5 text-3xl font-bold md:mb-6 md:text-5xl lg:mb-12">
+            <h2 className="mb-5 text-3xl font-semibold md:mb-6 md:text-5xl lg:mb-12">
               956 tons
             </h2>
             <Link to={"/calculator"}>
-              <a className="mb-5 w-full rounded-md bg-black px-6 py-3 text-center font-semibold text-white md:mb-6 lg:mb-8">
+              <a
+                className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
+                style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
+              >
                 Reduce the emissions
               </a>
             </Link>
