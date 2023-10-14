@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 export default function LandingPage() {
   return (
     <div className="bg-white flex flex-col justify-center items-center p-20 mt-28">
-      <main className="isolate">
-        <div className=" mt-32 px-6 lg:px-8">
-          <div className="mt- mx-auto max-w-2xl text-center">
+      <main className="isolate bg-white p-14 rounded-lg border border-gray-300 shadow-lg">
+        <div className=" mt-4 px-6 lg:px-8">
+          <div className=" mx-auto max-w-2xl text-center">
             <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Carbon Emission is BAD 🫨
             </h2>
