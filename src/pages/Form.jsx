@@ -1,5 +1,5 @@
 import { QuantityInput } from "../components/quantityInput";
-import { DropDown } from "../components/dropdown"
+import { DropDown } from "../components/dropdown";
 import { useState } from "react";
 
 const electricalAppliances = [
@@ -27,10 +27,18 @@ const electricalAppliances = [
     id: 6,
     name: 'Lift',
   },
-]
+];
+
+const dropdownConfigs = [
+  { title: "Electrical Appliances", level: ["20", "10", "6"] },
+  { title: "Electrical Appliances", level: ["40", "30", "20"] },
+  { title: "Electrical Appliances", level: ["5", "5", "5"] },
+  { title: "Electrical Appliances", level: ["5", "20", "3"] },
+  { title: "Electrical Appliances", level: ["4", "4", "2"] },
+  { title: "Electrical Appliances", level: ["3", "3", "3"] },
+];
 
 export default function Form() {
-
   const [selectedOptions, setSelectedOptions] = useState({
     dropdown1: 0,
     dropdown2: 1,
@@ -58,114 +66,24 @@ export default function Form() {
         </div>
         
         <div className='flex flex-col justify-between gap-y-6'>
-          <div className='mr-14'>
-            <DropDown
-            title="Electrical Appliances"
-            options={electricalAppliances}
-            selectedOption={selectedOptions.dropdown1}
-            onDropdownChange={(optionIndex) =>
-              handleDropdownChange("dropdown1", optionIndex)
-            }
-            />
-          </div>
-          <div>
-            <QuantityInput
-              level1="20"
-              level2="10"
-              level3="6"
-              showLevels={selectedOptions.dropdown1 !== 5}
-            />
-          </div>
-
-          <div className='mr-14'>
-            <DropDown
-              options={electricalAppliances}
-              selectedOption={selectedOptions.dropdown2}
-              onDropdownChange={(optionIndex) =>
-                handleDropdownChange("dropdown2", optionIndex)
-              }
-            />
-          </div>
-          <div>
-            <QuantityInput
-              level1="40"
-              level2="30"
-              level3="20"
-              showLevels={selectedOptions.dropdown2 !== 5}
-            />
-          </div>
-
-          <div className='mr-14'>
-            <DropDown
-              options={electricalAppliances}
-              selectedOption={selectedOptions.dropdown3}
-              onDropdownChange={(optionIndex) =>
-                handleDropdownChange("dropdown3", optionIndex)
-              }
-            />
-          </div>
-          <div>
-            <QuantityInput
-              level1="5"
-              level2="5"
-              level3="5"
-              showLevels={selectedOptions.dropdown3 !== 5}
-            />
-          </div>
-
-          <div className='mr-14'>
-            <DropDown
-              options={electricalAppliances}
-              selectedOption={selectedOptions.dropdown4}
-              onDropdownChange={(optionIndex) =>
-                handleDropdownChange("dropdown4", optionIndex)
-              }
-            />
-          </div>
-          <div>
-            <QuantityInput
-              level1="5"
-              level2="20"
-              level3="3"
-              showLevels={selectedOptions.dropdown4 !== 5}
-            />
-          </div>
-
-          <div className='mr-14'>
-            <DropDown
-              options={electricalAppliances}
-              selectedOption={selectedOptions.dropdown5}
-              onDropdownChange={(optionIndex) =>
-                handleDropdownChange("dropdown5", optionIndex)
-              }
-            />
-          </div>
-          <div>
-            <QuantityInput
-              level1="4"
-              level2="4"
-              level3="2"
-              showLevels={selectedOptions.dropdown5 !== 5}
-            />
-          </div>
-
-          <div className='mr-14'>
-            <DropDown
-              options={electricalAppliances}
-              selectedOption={selectedOptions.dropdown6}
-              onDropdownChange={(optionIndex) =>
-                handleDropdownChange("dropdown6", optionIndex)
-              }
-            />
-          </div>
-          <div>
-            <QuantityInput
-              level1="3"
-              level2="3"
-              level3="3"
-              showLevels={selectedOptions.dropdown6 !== 5}
-            />
-          </div>
+          {dropdownConfigs.map((config, index) => (
+            <div key={index} className='mr-14'>
+              <DropDown
+                title={config.title}
+                options={electricalAppliances}
+                selectedOption={selectedOptions[`dropdown${index + 1}`]}
+                onDropdownChange={(optionIndex) =>
+                  handleDropdownChange(`dropdown${index + 1}`, optionIndex)
+                }
+              />
+              <QuantityInput
+                level1={config.level[0]}
+                level2={config.level[1]}
+                level3={config.level[2]}
+                showLevels={selectedOptions[`dropdown${index + 1}`] !== 5}
+              />
+            </div>
+          ))}
         </div>
 
         <div className="mt-6 flex items-center justify-end gap-x-6">
@@ -181,5 +99,5 @@ export default function Form() {
         </div>
       </form>
     </div>
-  )
+  );
 }
