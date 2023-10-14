@@ -29,8 +29,6 @@ const electricalConsumption = [
   { title: "Lift", power: "0.5" },
 ];
 
-const defaultValue = 3;
-
 function calculateTotalPowerConsumption(
   dropdownConfigs,
   electricalConsumption,
@@ -64,7 +62,40 @@ function calculateTotalPowerConsumption(
   console.log('Total Units by Component:', totalUnitsByComponent);
   console.log('Hours Array:', hoursArray);
 
-  return totalPowerConsumption;
+  // Format totalPowerConsumption to 2 decimal places
+  const formattedTotalPowerConsumption = totalPowerConsumption.toFixed(2);
+
+  return formattedTotalPowerConsumption;
+}
+
+function calculateTotalPowerConsumptionByLevel(
+  dropdownConfigs,
+  electricalConsumption,
+  hoursArray
+) {
+  if (
+    !Array.isArray(dropdownConfigs) ||
+    !Array.isArray(electricalConsumption) ||
+    !Array.isArray(hoursArray)
+  ) {
+    console.error("Invalid data format. Arrays are expected.");
+    return "Invalid data format"; // Return 0 or handle the error as needed
+  }
+
+  const totalPowerByLevel = [0, 0, 0]; // Initialize an array to store total power consumption for each level
+
+  dropdownConfigs.forEach((config, index) => {
+    const power = parseFloat(electricalConsumption[index].power);
+    const levels = config.levels.map(level => parseInt(level, 10));
+    
+    levels.forEach((quantity, levelIndex) => {
+      totalPowerByLevel[levelIndex] += power * quantity * hoursArray[index];
+    });
+  });
+
+  console.log('Total Power Consumption by Level:', totalPowerByLevel);
+
+  return totalPowerByLevel;
 }
 
 
@@ -217,6 +248,14 @@ export default function Form() {
       electricalConsumption,
       hoursArray
     );
+
+    const totalPowerByLevel = calculateTotalPowerConsumptionByLevel(
+      dropdownConfigs,
+      electricalConsumption,
+      hoursArray
+    );
+  
+    console.log('Total Power Consumption by Level:', totalPowerByLevel);
   
     console.log('Total Power Consumption:', totalPower);
     // Perform other actions if needed
@@ -250,6 +289,11 @@ export default function Form() {
             ))}
           </div>
           {calculateTotalPowerConsumption(
+            dropdownConfigs,
+            electricalConsumption,
+            Object.values(hoursUsed).map((hours) => parseInt(hours, 10))
+          )}
+          {calculateTotalPowerConsumptionByLevel(
             dropdownConfigs,
             electricalConsumption,
             Object.values(hoursUsed).map((hours) => parseInt(hours, 10))
