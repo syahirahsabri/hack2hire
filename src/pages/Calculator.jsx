@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { HomeIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftOnRectangleIcon } from "@heroicons/react/24/outline";
 
 //Data and information
 const calculatorData = {
@@ -67,13 +67,13 @@ const description = {
 const savingOptions = {
   Improvement: [
     {
-      method: "Reduce Lamp/Change to LED",
-      savings: "-15% emission!",
-    },
-    { method: "Reduce AC", savings: "-30% emission!" },
-    {
-      method: "Reduce Computer/Router",
+      method: "Change to LED",
       savings: "-10% emission!",
+    },
+    { method: "Reduce AC usage", savings: "-30% emission!" },
+    {
+      method: "Implement smart sensor",
+      savings: "-15% emission",
     },
   ],
 };
@@ -152,7 +152,7 @@ function RenderDataAfter() {
   return (
     <div className="mt-10 items-center justify-center">
       <div className="flex flex-col justify-center items-center rounded-3xl p-6 bg-white border border-gray-200">
-        <img src="src/assets/output.png" className="w-[80%] h-[80%]" />
+        <img src="src/assets/output.png"  />
       </div>
     </div>
   );
@@ -310,7 +310,7 @@ export default function Calculator() {
                 />
                 <div className="my-5 flex flex-col justify-center items-center">
                   <Link to={"/dashboard"}>
-                    <HomeIcon
+                    <ArrowLeftOnRectangleIcon
                       className="h-6 w-6 hover:scale-110"
                       aria-hidden="true"
                     />
