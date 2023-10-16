@@ -20,14 +20,18 @@ function PowerBIDashboard() {
 export default function Dashboard() {
   return (
     <>
+    
       <div className="flex flex-col items-center justify-center px-5 py-16 md:px-10 md:py-24 lg:py-20">
         <div className="mb-8 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
           <h2 className="text-3xl font-bold mb-5 md:text-5xl">👩‍💻</h2>
           <h2 className="text-3xl mb-5 font-bold md:text-5xl">
             Welcome back, Dell!
           </h2>
-          <div>
+          <div className="mb-5 w-[100%]">
             <Prediction />
+          </div>
+          <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
+            <PowerBIDashboard />
           </div>
           <div className="p-2 mb-6">
             <Link to={"/form"}>
@@ -38,9 +42,6 @@ export default function Dashboard() {
                 Update your building info
               </a>
             </Link> 
-          </div>
-          <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
-            <PowerBIDashboard />
           </div>
         </div>
       </div>
