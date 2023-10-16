@@ -80,7 +80,52 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function RenderData({ data, totalPower, totalPowerByLevel }) {
+// function RenderData({ data, totalPower, totalPowerByLevel }) {
+//   return (
+//     <div className="isolate mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
+//       {Object.keys(data).map((key, index) => (
+//         <div
+//           key={index}
+//           className="rounded-3xl p-6 bg-white border border-gray-200"
+//         >
+//           {key === "electricity" ? (
+//             <div className="flex flex-col justify-center items-center">
+//               <p className="text-xl">Total Electricity Consumption</p>
+//               <p className="mt-2 text-lg leading-6 text-gray-600">
+//                 {totalPower} kWh
+//               </p>
+//               <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
+//                 {data[key].consumptionByLevel.map((levelData, levelIndex) => (
+//                   <li key={levelData.level}>
+//                     <b>{levelData.level}</b> <br />
+//                     {totalPowerByLevel[levelIndex].toFixed(2)}
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           ) : (
+//             <div className="flex flex-col justify-center items-center">
+//               <p className="text-xl">Total Carbon Emission</p>
+//               <p className="mt-2 text-lg leading-6 text-gray-600">
+//                 {(totalPower * 0.78).toFixed(2)} gCO₂e/h
+//               </p>
+//               <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
+//                 {data[key].emissionByLevel.map((levelData, levelIndex) => (
+//                   <li key={levelData.level}>
+//                     <b>{levelData.level}</b> <br />
+//                     {(totalPowerByLevel[levelIndex] * 0.78).toFixed(2)}
+//                   </li>
+//                 ))}
+//               </ul>
+//             </div>
+//           )}
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+function RenderDataBefore({ data, totalPower, totalPowerByLevel }) {
   return (
     <div className="isolate mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
       {Object.keys(data).map((key, index) => (
@@ -121,6 +166,16 @@ function RenderData({ data, totalPower, totalPowerByLevel }) {
           )}
         </div>
       ))}
+    </div>
+  );
+}
+
+function RenderDataAfter() {
+  return (
+    <div className="mt-10 items-center justify-center">
+      <div className="flex flex-col justify-center items-center rounded-3xl p-6 bg-white border border-gray-200">
+        <h1 className="text-3xl">Put output here!</h1>
+      </div>
     </div>
   );
 }
@@ -300,15 +355,49 @@ export default function Calculator() {
             </div>
           </div>
           {/* Render data */}
-          {openPopUp && (
+          {/* {openPopUp && (
             <RenderData
               data={selectedOption.data}
               totalPower={totalPower}
               totalPowerByLevel={totalPowerByLevel}
             />
-          )}
-          {openPopUp && showWhatYouCanChange && <WhatIWantToChange />}
-          {openPopUp && showWhatYouCanDo && <WhatYouCanDo />}
+          )} */}
+          {/* {openPopUp &&
+            showWhatYouCanChange && (
+              <RenderDataBefore
+                data={selectedOption.data}
+                totalPower={totalPower}
+                totalPowerByLevel={totalPowerByLevel}
+              />
+            ) && <WhatIWantToChange />}
+          {openPopUp &&
+            showWhatYouCanDo && (
+              <RenderDataAfter
+                data={selectedOption.data}
+                totalPower={totalPower}
+                totalPowerByLevel={totalPowerByLevel}
+              />
+            ) && <WhatYouCanDo />} */}
+          {openPopUp &&
+            (showWhatYouCanChange ? (
+              <>
+                <RenderDataBefore
+                  data={selectedOption.data}
+                  totalPower={totalPower}
+                  totalPowerByLevel={totalPowerByLevel}
+                />
+                <WhatIWantToChange />
+              </>
+            ) : showWhatYouCanDo ? (
+              <>
+                <RenderDataAfter
+                  data={selectedOption.data}
+                  totalPower={totalPower}
+                  totalPowerByLevel={totalPowerByLevel}
+                />
+                <WhatYouCanDo />
+              </>
+            ) : null)}
         </div>
       </main>
     </div>
