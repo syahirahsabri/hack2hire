@@ -2,8 +2,32 @@ import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   return (
-    <div className="bg-white flex flex-col justify-center items-center p-20 mt-28">
-      <main className="isolate bg-white p-14 rounded-lg border border-gray-300 shadow-lg">
+    <div
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        backgroundColor: "transparent", // Set the background color of the main container to transparent
+      }}
+      className="bg-white flex flex-col justify-center items-center"
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1,
+          backgroundImage: `url(src/assets/water.jpg)`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          filter: "blur(10px)", // Apply the blur effect here
+        }}
+      />
+      <main 
+        className="isolate bg-white p-14 rounded-lg border border-gray-300 shadow-lg"
+      >
         <div className=" mt-4 px-6 lg:px-8">
           <div className=" mx-auto max-w-2xl text-center">
             <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -24,12 +48,6 @@ export default function LandingPage() {
                   View dashboard
                 </a>
               </Link>
-              <a
-                href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
-                Login <span aria-hidden="true">→</span>
-              </a>
             </div>
           </div>
           <div
