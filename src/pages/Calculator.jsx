@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-
+//Data and information
 const calculatorData = {
   options: [
     {
@@ -77,7 +77,7 @@ const savingOptions = {
   ],
 };
 
-
+// Function to handle data display
 function RenderDataBefore({ data, totalPower, totalPowerByLevel }) {
   return (
     <div className="isolate mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
@@ -133,7 +133,7 @@ function RenderDataAfter() {
   );
 }
 
-
+// Suggestions ---> Extra Box
 function WhatYouCanDo() {
   return (
     <div className="isolate mx-auto mt-8 grid grid-cols-1 gap-8 items-center justify-center">
@@ -204,7 +204,6 @@ function WhatIWantToChange() {
   );
 }
 
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -266,30 +265,7 @@ export default function Calculator() {
               ))}
             </div>
           </div>
-          {/* Render data */}
-          {/* {openPopUp && (
-            <RenderData
-              data={selectedOption.data}
-              totalPower={totalPower}
-              totalPowerByLevel={totalPowerByLevel}
-            />
-          )} */}
-          {/* {openPopUp &&
-            showWhatYouCanChange && (
-              <RenderDataBefore
-                data={selectedOption.data}
-                totalPower={totalPower}
-                totalPowerByLevel={totalPowerByLevel}
-              />
-            ) && <WhatIWantToChange />}
-          {openPopUp &&
-            showWhatYouCanDo && (
-              <RenderDataAfter
-                data={selectedOption.data}
-                totalPower={totalPower}
-                totalPowerByLevel={totalPowerByLevel}
-              />
-            ) && <WhatYouCanDo />} */}
+          {/* Render Data */}
           {openPopUp &&
             (showWhatYouCanChange ? (
               <>

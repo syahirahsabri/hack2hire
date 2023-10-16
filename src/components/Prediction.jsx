@@ -2,7 +2,7 @@ const stats = [
   {
     name: "Daily Electric Usage",
     value: "55 kWh",
-    change: "+4.75%",
+    change: "-4.75%",
     changeType: "positive",
   },
   {
@@ -25,7 +25,7 @@ function classNames(...classes) {
 
 export default function Prediction() {
   return (
-    <dl className="flex flex-row items-center justify-center space-x-4 mx-auto p-2">
+    <dl className="flex flex-row items-center justify-center space-x-4 mx-auto pb-5">
       {stats.map((stat) => (
         <div
           key={stat.name}
@@ -38,7 +38,7 @@ export default function Prediction() {
             className={classNames(
               stat.changeType === "negative"
                 ? "text-rose-600"
-                : "text-gray-700",
+                : "text-green-700",
               "text-xs font-medium"
             )}
           >

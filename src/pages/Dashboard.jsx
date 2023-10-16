@@ -19,30 +19,29 @@ function PowerBIDashboard() {
 export default function Dashboard() {
   return (
     <>
-    
       <div className="flex flex-col items-center justify-center px-5 py-16 md:px-10 md:py-24 lg:py-20">
-        <div className="mb-5 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
+        <div className="mb-5 w-full space-y-5 max-w-3xl text-center md:mb-6 lg:mb-8">
           <h2 className="text-3xl font-bold mb-2 md:text-5xl">👩‍💻</h2>
           <h2 className="text-3xl mb-2 font-bold md:text-5xl">
             Welcome back, Dell!
           </h2>
         </div>
-        <div className="mb-5">
-            <Prediction />
-          </div>
-          <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
-            <PowerBIDashboard />
-          </div>
-          <div className="p-2 mt-4">
-            <Link to={"/form"}>
-              <a
-                className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
-                style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
-              >
-                Update your building info
-              </a>
-            </Link> 
-          </div>
+        <div className="mb-5 w-[50%] h-[50%]">
+          <Prediction />
+        </div>
+        <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
+          <PowerBIDashboard />
+        </div>
+        <div className="p-2 mt-4">
+          <Link to={"/building-info"}>
+            <a
+              className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
+              style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
+            >
+              Update your building info
+            </a>
+          </Link>
+        </div>
       </div>
     </>
   );
