@@ -33,46 +33,54 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2 lg:w-[50%]">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-2 lg:w-[50%] mb-8 bg-white p-4 rounded-md border border-gray-300 shadow-xl">
           {/* Form div */}
           <div className="flex max-w-md flex-col items-center justify-center rounded-md border border-[#cdcdcd] p-8">
             <p className="mb-6 text-base font-light text-[#636262] md:mb-10 lg:mb-12">
-              Your current annual electricity usage is
+              Your current annual electricity usage (RM) is
             </p>
-            <h2 className="mb-5 text-3xl font-semibold md:mb-6 md:text-5xl lg:mb-12">
-              RM 10351
+            <h2 className="mb-5 text-3xl font-semibold md:mb-6 md:text-5xl lg:mb-6">
+              117.44K
             </h2>
-            <Link to={"/form"}>
+            {/* <Link to={"/form"}>
               <a
                 className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
                 style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
               >
                 Update your building info
               </a>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Calculator div */}
           <div className="flex max-w-md flex-col items-center justify-center rounded-md border border-[#cdcdcd] p-8">
             <p className="mb-6 text-base font-light text-[#636262] md:mb-10 lg:mb-12">
-              Your current annual carbon emission is
+              Your current annual carbon emission (gCO₂e/h) is
             </p>
-            <h2 className="mb-5 text-3xl font-semibold md:mb-6 md:text-5xl lg:mb-12">
-              956 tons
+            <h2 className="mb-5 text-3xl font-semibold md:mb-6 md:text-5xl lg:mb-6">
+              12.48K
             </h2>
-            <Link to={"/calculator"}>
+            {/* <Link to={"/calculator"}>
               <a
                 className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
                 style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
               >
                 Reduce the emissions
               </a>
-            </Link>
+            </Link> */}
           </div>
         </div>
+        <Link to={"/form"}>
+              <a
+                className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
+                style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
+              >
+                Reduce your building emissions now!
+              </a>
+            </Link>
         <a
           href="/"
-          className="mb-5 w-[20%] mt-10 py-3 text-center font-semibold text-black md:mb-6 lg:mb-8 hover:bg-white hover:text-black"
+          className="mb-5 w-[20%] mt-5 py-3 text-center font-semibold text-black md:mb-6 lg:mb-8 hover:bg-white hover:text-black"
         >
           👈🏻 Return to landing
         </a>
