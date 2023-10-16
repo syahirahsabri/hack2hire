@@ -119,7 +119,7 @@ function RenderDataBefore({ data, totalPower, totalPowerByLevel }) {
               <div className="flex flex-col items-center justify-center">
                 <p className="text-xl">Total Carbon Emission</p>
                 <p className="mt-2 text-lg leading-6 text-gray-600">
-                  {(totalPower * 0.78).toFixed(2)} gCO₂e/h
+                  {(totalPower * 0.78).toFixed(2)} gCO₂e/d
                 </p>
               </div>
               <div className="flex flex-row items-center justify-center mt-4">
