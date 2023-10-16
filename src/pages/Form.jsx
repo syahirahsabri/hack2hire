@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Listbox } from "@headlessui/react";
 
 const electricalAppliances = [
@@ -59,8 +59,8 @@ function calculateTotalPowerConsumption(
     totalPowerConsumption += power * units * hoursArray[index];
   });
 
-  console.log('Total Units by Component:', totalUnitsByComponent);
-  console.log('Hours Array:', hoursArray);
+  console.log("Total Units by Component:", totalUnitsByComponent);
+  console.log("Hours Array:", hoursArray);
 
   // Format totalPowerConsumption to 2 decimal places
   const formattedTotalPowerConsumption = totalPowerConsumption.toFixed(2);
@@ -79,25 +79,24 @@ function calculateTotalPowerConsumptionByLevel(
     !Array.isArray(hoursArray)
   ) {
     console.error("Invalid data format. Arrays are expected.");
-    return "Invalid data format"; // Return 0 or handle the error as needed
+    return "Invalid data format";
   }
 
-  const totalPowerByLevel = [0, 0, 0]; // Initialize an array to store total power consumption for each level
+  const totalPowerByLevel = [0, 0, 0];
 
   dropdownConfigs.forEach((config, index) => {
     const power = parseFloat(electricalConsumption[index].power);
-    const levels = config.levels.map(level => parseInt(level, 10));
-    
+    const levels = config.levels.map((level) => parseInt(level, 10));
+
     levels.forEach((quantity, levelIndex) => {
       totalPowerByLevel[levelIndex] += power * quantity * hoursArray[index];
     });
   });
 
-  console.log('Total Power Consumption by Level:', totalPowerByLevel);
+  console.log("Total Power Consumption by Level:", totalPowerByLevel);
 
   return totalPowerByLevel;
 }
-
 
 function QuantityInput({ level1, level2, level3, showLevels, onInputChange }) {
   const [hoursUsed, setHoursUsed] = useState(0);
@@ -208,6 +207,8 @@ function DropDown({ title, options, selectedOption, onDropdownChange }) {
 }
 
 export default function Form() {
+  const navigate = useNavigate();
+
   const [selectedOptions, setSelectedOptions] = useState({
     dropdown1: 0,
     dropdown2: 1,
@@ -226,6 +227,22 @@ export default function Form() {
     dropdown6: 0,
   });
 
+  const hoursArray = Object.values(hoursUsed).map((hours) =>
+    parseInt(hours, 10)
+  );
+
+  const totalPowerByLevel = calculateTotalPowerConsumptionByLevel(
+    dropdownConfigs,
+    electricalConsumption,
+    hoursArray
+  );
+
+  const totalPower = calculateTotalPowerConsumption(
+    dropdownConfigs,
+    electricalConsumption,
+    hoursArray
+  );
+
   const handleDropdownChange = (dropdownName, optionIndex) => {
     setSelectedOptions((prevState) => ({
       ...prevState,
@@ -240,26 +257,35 @@ export default function Form() {
     }));
   };
 
-  const handleCalculator = () => {
-    const hoursArray = Object.values(hoursUsed).map((hours) => parseInt(hours, 10));
-    console.log('Hours Array:', hoursArray); // Log hoursArray
-    const totalPower = calculateTotalPowerConsumption(
-      dropdownConfigs,
-      electricalConsumption,
-      hoursArray
-    );
-
-    const totalPowerByLevel = calculateTotalPowerConsumptionByLevel(
-      dropdownConfigs,
-      electricalConsumption,
-      hoursArray
-    );
-  
-    console.log('Total Power Consumption by Level:', totalPowerByLevel);
-  
-    console.log('Total Power Consumption:', totalPower);
-    // Perform other actions if needed
+  const handleNavigation = () => {
+    navigate("/calculator", { state: { totalPowerByLevel, totalPower } });
+    alert("Data saved! Redirecting to calculator");
   };
+
+  // const handleCalculator = () => {
+  //   const hoursArray = Object.values(hoursUsed).map((hours) =>
+  //     parseInt(hours, 10)
+  //   );
+
+  //   console.log("Hours Array:", hoursArray);
+  //   const totalPower = calculateTotalPowerConsumption(
+  //     dropdownConfigs,
+  //     electricalConsumption,
+  //     hoursArray
+  //   );
+
+  //   const totalPowerByLevel = calculateTotalPowerConsumptionByLevel(
+  //     dropdownConfigs,
+  //     electricalConsumption,
+  //     hoursArray
+  //   );
+
+  //   updateCalculatorData({ totalPowerByLevel, totalPower });
+  //   // updateTotalPowerByLevel(totalPowerByLevel);
+  //   // updateTotalPower(totalPower);
+
+  //   alert("Data saved!");
+  // };
 
   return (
     <>
@@ -288,20 +314,31 @@ export default function Form() {
               </div>
             ))}
           </div>
-          {calculateTotalPowerConsumption(
-            dropdownConfigs,
-            electricalConsumption,
-            Object.values(hoursUsed).map((hours) => parseInt(hours, 10))
-          )}
-          {calculateTotalPowerConsumptionByLevel(
-            dropdownConfigs,
-            electricalConsumption,
-            Object.values(hoursUsed).map((hours) => parseInt(hours, 10))
-          )}
+
+          {/* Display output */}
+          {/* <h1 className="font-semibold">Total Power Consumption (kWh)</h1>
+          <div className="mb-3">
+            {calculateTotalPowerConsumption(
+              dropdownConfigs,
+              electricalConsumption,
+              Object.values(hoursUsed).map((hours) => parseInt(hours, 10))
+            )}
+          </div>
+          <h1>Power Consumption by Level </h1>
+          <div className="flex flex-col justify-center items-center">
+            {totalPowerByLevel.map((powerByLevel, index) => (
+              <div key={index}>
+                <p>
+                  Level {index + 1}: {powerByLevel.toFixed(2)} kWh
+                </p>
+              </div>
+            ))}
+          </div> */}
+
         </form>
       </div>
 
-      {/* Buttons */}
+      {/* Form Buttons */}
       <div className="mt-14 mb-14 flex items-center justify-center gap-x-6">
         <Link to={"/dashboard"}>
           <button
@@ -312,8 +349,10 @@ export default function Form() {
           </button>
         </Link>
         <button
-          type="button"
-          onClick={() => handleCalculator()}
+          onClick={
+            handleNavigation
+            // updateCalculatorData({ totalPowerByLevel, totalPower })
+          }
           className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Save

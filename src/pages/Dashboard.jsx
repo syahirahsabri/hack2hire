@@ -37,7 +37,7 @@ export default function Dashboard() {
               >
                 Update your building info
               </a>
-            </Link>
+            </Link> 
           </div>
           <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
             <PowerBIDashboard />
