@@ -107,8 +107,9 @@ function RenderDataBefore({ data, totalPower, totalPowerByLevel }) {
                 </ul>
                 <div className="w-[70%] ml-14">
                   <img
-                      src="src/assets/electricEmit.jpeg"
-                    />
+                    src="src/assets/electricity.png"
+                    className="w-[90%] h-[90%]"
+                  />
                 </div>
               </div>
             </div>
@@ -116,9 +117,9 @@ function RenderDataBefore({ data, totalPower, totalPowerByLevel }) {
             <div className="flex flex-col items-center justify-center">
               <div className="flex flex-col items-center justify-center">
                 <p className="text-xl">Total Carbon Emission</p>
-                  <p className="mt-2 text-lg leading-6 text-gray-600">
-                    {(totalPower * 0.78).toFixed(2)} gCO₂e/h
-                  </p>
+                <p className="mt-2 text-lg leading-6 text-gray-600">
+                  {(totalPower * 0.78).toFixed(2)} gCO₂e/h
+                </p>
               </div>
               <div className="flex flex-row items-center justify-center mt-4">
                 <div className="flex flex-col justify-center items-center">
@@ -133,7 +134,8 @@ function RenderDataBefore({ data, totalPower, totalPowerByLevel }) {
                 </div>
                 <div className="w-[70%] ml-14">
                   <img
-                    src="src/assets/carbonEmit.jpeg"
+                    src="src/assets/emission.png"
+                    className="w-[90%] h-[90%]"
                   />
                 </div>
               </div>
@@ -185,7 +187,7 @@ function WhatIWantToChange() {
   };
 
   return (
-    <div className="isolate mx-auto mt-8 grid grid-cols-1 gap-8 items-center justify-center">
+    <div className="isolate mx-auto mt-8 grid grid-cols-1 gap-8 mb-10 items-center justify-center">
       <div className="flex flex-col rounded-3xl p-6 bg-white border border-gray-200 justify-center items-center">
         <p className="text-xl">
           What improvement would you make to the building?
