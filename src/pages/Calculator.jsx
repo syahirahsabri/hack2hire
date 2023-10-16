@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { HomeIcon } from "@heroicons/react/24/outline";
 
 //Data and information
 const calculatorData = {
@@ -151,7 +152,7 @@ function RenderDataAfter() {
   return (
     <div className="mt-10 items-center justify-center">
       <div className="flex flex-col justify-center items-center rounded-3xl p-6 bg-white border border-gray-200">
-        <h1 className="text-3xl">Put output here!</h1>
+        <img src="src/assets/output.png" className="w-[80%] h-[80%]" />
       </div>
     </div>
   );
@@ -307,7 +308,18 @@ export default function Calculator() {
                   totalPower={totalPower}
                   totalPowerByLevel={totalPowerByLevel}
                 />
-                <WhatYouCanDo />
+                <div className="my-5 flex flex-col justify-center items-center">
+                  <Link to={"/dashboard"}>
+                    <HomeIcon
+                      className="h-6 w-6 hover:scale-110"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                  {/* 
+                  <a href="/dashboard" className="text-gray">
+                    👈 Return to landing
+                  </a> */}
+                </div>
               </>
             ) : null)}
         </div>

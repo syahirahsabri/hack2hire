@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Prediction from "../components/Prediction.jsx";
+import { HomeIcon } from "@heroicons/react/24/outline";
 
 function PowerBIDashboard() {
   return (
@@ -32,14 +33,20 @@ export default function Dashboard() {
         <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
           <PowerBIDashboard />
         </div>
-        <div className="p-2 mt-4">
+        <div className="flex flex-col justify-center items-center space-y-8 p-2 mt-4">
           <Link to={"/building-info"}>
             <a
-              className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
+              className="mt-3 inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
               style={{ boxShadow: "6px 6px rgb(192,192,192)" }}
             >
               Update your building info
             </a>
+          </Link>
+          <Link to={"/"}>
+            <HomeIcon
+              className="h-8 w-8 hover:scale-110"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </div>

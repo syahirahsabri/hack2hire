@@ -37,7 +37,7 @@ export default function BuildingInfo() {
                 <h1 className="text-xl font-semibold mt-3">{building.name}</h1>
               </div>
               <div className="flex flex-col items-center justify-center">
-                <p className="text-gray-600">Levels</p>
+                <p className="text-gray-600">Floors</p>
                 <h1 className="text-xl font-semibold mt-3">
                   {building.levels}
                 </h1>
