@@ -296,7 +296,7 @@ export default function Form() {
 
         {/* Form Buttons */}
         <div className="mt-14 mb-14 flex items-center justify-center gap-x-6">
-          <Link to={"/dashboard"}>
+          <Link to={"/building-info"}>
             <button
               type="button"
               className="text-sm font-semibold leading-6 text-gray-900"
