@@ -7,9 +7,8 @@ function PowerBIDashboard() {
       <iframe
         title="Full Dashboard"
         width="1300"
-        height="700"
-        className="border-2 border-black"
-        src="https://app.powerbi.com/reportEmbed?reportId=00ffccd9-4c97-494b-913f-53996629335b&autoAuth=true&ctid=1f551aeb-7ea1-472c-9ac0-09de9bf33051"
+        height="800"
+        src="https://app.powerbi.com/view?r=eyJrIjoiOTg1MjEzODItZWYwYy00ZmI2LWJjN2YtNDMzMGM4OGI1MzJhIiwidCI6IjFmNTUxYWViLTdlYTEtNDcyYy05YWMwLTA5ZGU5YmYzMzA1MSIsImMiOjEwfQ%3D%3D"
         // frameborder="100"
         allowFullScreen="true"
       />
@@ -21,15 +20,19 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex flex-col items-center justify-center px-5 py-16 md:px-10 md:py-24 lg:py-20">
-        <div className="mb-8 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
-          <h2 className="text-3xl font-bold mb-5 md:text-5xl">👩‍💻</h2>
-          <h2 className="text-3xl mb-5 font-bold md:text-5xl">
+        <div className="mb-5 w-full max-w-3xl text-center md:mb-12 lg:mb-16">
+          <h2 className="text-3xl font-bold mb-2 md:text-5xl">👩‍💻</h2>
+          <h2 className="text-3xl mb-2 font-bold md:text-5xl">
             Welcome back, Dell!
           </h2>
-          <div>
+        </div>
+        <div className="mb-5">
             <Prediction />
           </div>
-          <div className="p-2 mb-6">
+          <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
+            <PowerBIDashboard />
+          </div>
+          <div className="p-2 mt-4">
             <Link to={"/form"}>
               <a
                 className="inline-block rounded-xl bg-black px-8 py-4 text-center font-semibold text-white"
@@ -39,10 +42,6 @@ export default function Dashboard() {
               </a>
             </Link> 
           </div>
-          <div className="flex flex-col justify-center w-800 items-center z-0 font-bold md:text-5xl">
-            <PowerBIDashboard />
-          </div>
-        </div>
       </div>
     </>
   );
