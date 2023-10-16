@@ -87,34 +87,56 @@ function RenderDataBefore({ data, totalPower, totalPowerByLevel }) {
           className="rounded-3xl p-6 bg-white border border-gray-200"
         >
           {key === "electricity" ? (
-            <div className="flex flex-col justify-center items-center">
-              <p className="text-xl">Total Electricity Consumption</p>
-              <p className="mt-2 text-lg leading-6 text-gray-600">
-                {totalPower} kWh
-              </p>
-              <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
-                {data[key].consumptionByLevel.map((levelData, levelIndex) => (
-                  <li key={levelData.level}>
-                    <b>{levelData.level}</b> <br />
-                    {totalPowerByLevel[levelIndex].toFixed(2)}
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col justify-center items-center">
+                  <p className="text-xl">Total Electricity Consumption</p>
+                  <p className="mt-2 text-lg leading-6 text-gray-600">
+                    {totalPower} kWh
+                  </p>
+                </div>
+              </div>
+              <div className="flex flex-row items-center justify-center mt-4">
+                <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
+                  {data[key].consumptionByLevel.map((levelData, levelIndex) => (
+                    <li key={levelData.level}>
+                      <b>{levelData.level}</b> <br />
+                      {totalPowerByLevel[levelIndex].toFixed(2)}
+                    </li>
+                  ))}
+                </ul>
+                <div className="w-[70%] ml-14">
+                  <img
+                      src="src/assets/electricEmit.jpeg"
+                    />
+                </div>
+              </div>
             </div>
           ) : (
-            <div className="flex flex-col justify-center items-center">
-              <p className="text-xl">Total Carbon Emission</p>
-              <p className="mt-2 text-lg leading-6 text-gray-600">
-                {(totalPower * 0.78).toFixed(2)} gCO₂e/h
-              </p>
-              <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
-                {data[key].emissionByLevel.map((levelData, levelIndex) => (
-                  <li key={levelData.level}>
-                    <b>{levelData.level}</b> <br />
-                    {(totalPowerByLevel[levelIndex] * 0.78).toFixed(2)}
-                  </li>
-                ))}
-              </ul>
+            <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-xl">Total Carbon Emission</p>
+                  <p className="mt-2 text-lg leading-6 text-gray-600">
+                    {(totalPower * 0.78).toFixed(2)} gCO₂e/h
+                  </p>
+              </div>
+              <div className="flex flex-row items-center justify-center mt-4">
+                <div className="flex flex-col justify-center items-center">
+                  <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
+                    {data[key].emissionByLevel.map((levelData, levelIndex) => (
+                      <li key={levelData.level}>
+                        <b>{levelData.level}</b> <br />
+                        {(totalPowerByLevel[levelIndex] * 0.78).toFixed(2)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="w-[70%] ml-14">
+                  <img
+                    src="src/assets/carbonEmit.jpeg"
+                  />
+                </div>
+              </div>
             </div>
           )}
         </div>
