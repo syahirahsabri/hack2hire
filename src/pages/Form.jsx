@@ -262,111 +262,56 @@ export default function Form() {
     alert("Data saved! Redirecting to calculator");
   };
 
-  // const handleCalculator = () => {
-  //   const hoursArray = Object.values(hoursUsed).map((hours) =>
-  //     parseInt(hours, 10)
-  //   );
-
-  //   console.log("Hours Array:", hoursArray);
-  //   const totalPower = calculateTotalPowerConsumption(
-  //     dropdownConfigs,
-  //     electricalConsumption,
-  //     hoursArray
-  //   );
-
-  //   const totalPowerByLevel = calculateTotalPowerConsumptionByLevel(
-  //     dropdownConfigs,
-  //     electricalConsumption,
-  //     hoursArray
-  //   );
-
-  //   updateCalculatorData({ totalPowerByLevel, totalPower });
-  //   // updateTotalPowerByLevel(totalPowerByLevel);
-  //   // updateTotalPower(totalPower);
-
-  //   alert("Data saved!");
-  // };
-
   return (
     <>
-    <div>
+      <div>
+        <div className="flex flex-col justify-center items-center"></div>
+        <div className="mt-10 ml-[13%] bg-white w-[75%] p-4 rounded-md border border-gray-300 shadow-xl">
+          <form className="flex flex-col justify-center items-center">
+            <div className="flex flex-wrap justify-between p-8 py-3">
+              {dropdownConfigs.map((config, index) => (
+                <div key={index}>
+                  <DropDown
+                    title={config.title}
+                    options={electricalAppliances}
+                    selectedOption={selectedOptions[`dropdown${index + 1}`]}
+                    onDropdownChange={(optionIndex) =>
+                      handleDropdownChange(`dropdown${index + 1}`, optionIndex)
+                    }
+                  />
+                  <QuantityInput
+                    level1={config.levels[0]}
+                    level2={config.levels[1]}
+                    level3={config.levels[2]}
+                    showLevels={selectedOptions[`dropdown${index + 1}`] !== 5}
+                    onInputChange={(hours) =>
+                      handleHoursChange(`dropdown${index + 1}`, hours)
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          </form>
+        </div>
 
-      <div className="flex flex-col justify-center items-center">
-        <img
-          src="src\assets\room.png"
-          style={{ width: '500px', height: '400px' }}
-        />
-      </div>
-      <div className="mt-10 ml-[13%] bg-white w-[75%] p-4 rounded-md border border-gray-300 shadow-xl">
-        <form className="flex flex-col justify-center items-center">
-          <div className="flex flex-wrap justify-between p-8 py-3">
-            {dropdownConfigs.map((config, index) => (
-              <div key={index}>
-                <DropDown
-                  title={config.title}
-                  options={electricalAppliances}
-                  selectedOption={selectedOptions[`dropdown${index + 1}`]}
-                  onDropdownChange={(optionIndex) =>
-                    handleDropdownChange(`dropdown${index + 1}`, optionIndex)
-                  }
-                />
-                <QuantityInput
-                  level1={config.levels[0]}
-                  level2={config.levels[1]}
-                  level3={config.levels[2]}
-                  showLevels={selectedOptions[`dropdown${index + 1}`] !== 5}
-                  onInputChange={(hours) =>
-                    handleHoursChange(`dropdown${index + 1}`, hours)
-                  }
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Display output */}
-          {/* <h1 className="font-semibold">Total Power Consumption (kWh)</h1>
-          <div className="mb-3">
-            {calculateTotalPowerConsumption(
-              dropdownConfigs,
-              electricalConsumption,
-              Object.values(hoursUsed).map((hours) => parseInt(hours, 10))
-            )}
-          </div>
-          <h1>Power Consumption by Level </h1>
-          <div className="flex flex-col justify-center items-center">
-            {totalPowerByLevel.map((powerByLevel, index) => (
-              <div key={index}>
-                <p>
-                  Level {index + 1}: {powerByLevel.toFixed(2)} kWh
-                </p>
-              </div>
-            ))}
-          </div> */}
-
-        </form>
-      </div>
-
-      {/* Form Buttons */}
-      <div className="mt-14 mb-14 flex items-center justify-center gap-x-6">
-        <Link to={"/dashboard"}>
+        {/* Form Buttons */}
+        <div className="mt-14 mb-14 flex items-center justify-center gap-x-6">
+          <Link to={"/dashboard"}>
+            <button
+              type="button"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Cancel
+            </button>
+          </Link>
           <button
-            type="button"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            onClick={handleNavigation}
+            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Cancel
+            Save
           </button>
-        </Link>
-        <button
-          onClick={
-            handleNavigation
-            // updateCalculatorData({ totalPowerByLevel, totalPower })
-          }
-          className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Save
-        </button>
+        </div>
       </div>
-    </div>
     </>
   );
 }
