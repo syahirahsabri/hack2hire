@@ -289,6 +289,14 @@ export default function Form() {
 
   return (
     <>
+    <div>
+
+      <div className="flex flex-col justify-center items-center">
+        <img
+          src="src\assets\room.png"
+          style={{ width: '500px', height: '400px' }}
+        />
+      </div>
       <div className="mt-10 ml-[13%] bg-white w-[75%] p-4 rounded-md border border-gray-300 shadow-xl">
         <form className="flex flex-col justify-center items-center">
           <div className="flex flex-wrap justify-between p-8 py-3">
@@ -358,6 +366,7 @@ export default function Form() {
           Save
         </button>
       </div>
+    </div>
     </>
   );
 }
