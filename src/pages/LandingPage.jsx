@@ -6,7 +6,7 @@ export default function LandingPage() {
       style={{
         position: "relative",
         minHeight: "100vh",
-        backgroundColor: "transparent", 
+        backgroundColor: "transparent",
       }}
       className="bg-white flex flex-col justify-center items-center"
     >
@@ -29,10 +29,10 @@ export default function LandingPage() {
         <div className=" mt-4 px-6 lg:px-8">
           <div className=" mx-auto max-w-2xl text-center">
             <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Carbon Emission is BAD 🫨
+              <span className="text-[#355E3B]">Eco</span>Solve 🌲
             </h2>
             <h3 className="mt-4 text-3xl">
-              Excessive electricity consumption <br /> makes things worse 🤦‍♀️
+              Excessive electricity consumption <br /> makes things worse
             </h3>
 
             <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
