@@ -1,21 +1,21 @@
 const stats = [
   {
     name: "Daily Electric Usage",
-    value: "55 kWh",
-    change: "-4.75%",
-    changeType: "positive",
+    value: "366 kWh",
+    change: "+4.00%",
+    changeType: "negative",
   },
   {
     name: "Expected Monthly Bill",
-    value: "RM 12,000",
-    change: "-1.39%",
+    value: "RM 8755",
+    change: "-1.92%",
     changeType: "positive",
   },
   {
-    name: "Expected Carbon Emission",
-    value: "1000 tons",
-    change: "+10.18%",
-    changeType: "negative",
+    name: "Expected Monthly Carbon Emission",
+    value: "0.2628 tons/m",
+    change: "-1.97%",
+    changeType: "positive",
   },
 ];
 

@@ -98,14 +98,25 @@ function calculateTotalPowerConsumptionByLevel(
   return totalPowerByLevel;
 }
 
-function QuantityInput({ level1, level2, level3, showLevels, onInputChange }) {
-  const [hoursUsed, setHoursUsed] = useState(0);
+function QuantityInput({ level1, level2, level3, showLevels, initialHours, onInputChange }) {
+  const [hoursUsed, setHoursUsed] = useState({
+    dropdown1: initialHours, // Set initial value based on prop
+    dropdown2: 9,
+    dropdown3: 24,
+    dropdown4: 9.5,
+    dropdown5: 24,
+    dropdown6: 24,
+  });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e, dropdownName) => {
     const newValue = e.target.value;
-    setHoursUsed(newValue);
-    onInputChange(newValue);
+    setHoursUsed((prevState) => ({
+      ...prevState,
+      [dropdownName]: newValue,
+    }));
+    onInputChange(newValue); // Pass the single value directly
   };
+
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="mt-4 flex flex-col justify-center items-center p-4 rounded-md border border-gray-300 shadow-xl bg-white">
@@ -174,8 +185,8 @@ function QuantityInput({ level1, level2, level3, showLevels, onInputChange }) {
           type="text"
           name="level_3"
           id="level_3"
-          onChange={handleInputChange}
-          value={hoursUsed}
+          onChange={(e) => handleInputChange(e, "dropdown1")}
+          value={hoursUsed.dropdown1}
           className="flex flex-col items-center justify-center w-[20%] h-8 border border-gray-300 rounded-md px-2 py-1 text-gray-700 focus:outline-none"
         />
       </div>
@@ -219,12 +230,12 @@ export default function Form() {
   });
 
   const [hoursUsed, setHoursUsed] = useState({
-    dropdown1: 0,
-    dropdown2: 0,
-    dropdown3: 0,
-    dropdown4: 0,
-    dropdown5: 0,
-    dropdown6: 0,
+    dropdown1: 9,
+    dropdown2: 9,
+    dropdown3: 24,
+    dropdown4: 9.5,
+    dropdown5: 24,
+    dropdown6: 24,
   });
 
   const hoursArray = Object.values(hoursUsed).map((hours) =>
@@ -269,27 +280,29 @@ export default function Form() {
         <div className="mt-10 ml-[13%] bg-white w-[75%] p-4 rounded-md border border-gray-300 shadow-xl">
           <form className="flex flex-col justify-center items-center">
             <div className="flex flex-wrap justify-between p-8 py-3">
-              {dropdownConfigs.map((config, index) => (
-                <div key={index}>
-                  <DropDown
-                    title={config.title}
-                    options={electricalAppliances}
-                    selectedOption={selectedOptions[`dropdown${index + 1}`]}
-                    onDropdownChange={(optionIndex) =>
-                      handleDropdownChange(`dropdown${index + 1}`, optionIndex)
-                    }
-                  />
-                  <QuantityInput
-                    level1={config.levels[0]}
-                    level2={config.levels[1]}
-                    level3={config.levels[2]}
-                    showLevels={selectedOptions[`dropdown${index + 1}`] !== 5}
-                    onInputChange={(hours) =>
-                      handleHoursChange(`dropdown${index + 1}`, hours)
-                    }
-                  />
-                </div>
-              ))}
+            {dropdownConfigs.map((config, index) => (
+              <div key={index}>
+                <DropDown
+                  title={config.title}
+                  options={electricalAppliances}
+                  selectedOption={selectedOptions[`dropdown${index + 1}`]}
+                  onDropdownChange={(optionIndex) =>
+                    handleDropdownChange(`dropdown${index + 1}`, optionIndex)
+                  }
+                />
+                <QuantityInput
+                  level1={config.levels[0]}
+                  level2={config.levels[1]}
+                  level3={config.levels[2]}
+                  showLevels={selectedOptions[`dropdown${index + 1}`] !== 5}
+                  // Pass the specific initial value as a prop to QuantityInput
+                  initialHours={hoursUsed[`dropdown${index + 1}`]}
+                  onInputChange={(hours) =>
+                    handleHoursChange(`dropdown${index + 1}`, hours)
+                  }
+                />
+              </div>
+            ))}
             </div>
           </form>
         </div>
