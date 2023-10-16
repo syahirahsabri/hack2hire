@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const calculatorData = {
   options: [
@@ -63,9 +64,15 @@ const description = {
 
 const savingOptions = {
   Improvement: [
-    "Reduce Lamp/Change to LED",
-    "Reduce AC",
-    "Reduce Computer/Router",
+    {
+      method: "Reduce Lamp/Change to LED",
+      savings: "-15% emission!",
+    },
+    { method: "Reduce AC", savings: "-30% emission!" },
+    {
+      method: "Reduce Computer/Router",
+      savings: "-10% emission!",
+    },
   ],
 };
 
@@ -73,7 +80,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function RenderData({ data }) {
+function RenderData({ data, totalPower, totalPowerByLevel }) {
   return (
     <div className="isolate mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
       {Object.keys(data).map((key, index) => (
@@ -81,33 +88,32 @@ function RenderData({ data }) {
           key={index}
           className="rounded-3xl p-6 bg-white border border-gray-200"
         >
-          {/* <h3 className="text-lg font-semibold text-gray-900">{key}</h3> */}
           {key === "electricity" ? (
-            <div className="flex flex-col jusitfy-center items-center">
+            <div className="flex flex-col justify-center items-center">
               <p className="text-xl">Total Electricity Consumption</p>
               <p className="mt-2 text-lg leading-6 text-gray-600">
-                {data[key].totalConsumption}
+                {totalPower} kWh
               </p>
               <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
-                {data[key].consumptionByLevel.map((levelData) => (
+                {data[key].consumptionByLevel.map((levelData, levelIndex) => (
                   <li key={levelData.level}>
                     <b>{levelData.level}</b> <br />
-                    {levelData.consumption}
+                    {totalPowerByLevel[levelIndex].toFixed(2)}
                   </li>
                 ))}
               </ul>
             </div>
           ) : (
-            <div className="flex flex-col jusitfy-center items-center">
+            <div className="flex flex-col justify-center items-center">
               <p className="text-xl">Total Carbon Emission</p>
               <p className="mt-2 text-lg leading-6 text-gray-600">
-                {data[key].totalEmission}
+                {(totalPower * 0.78).toFixed(2)} gCO₂e/h
               </p>
               <ul className="mt-4 text-sm leading-6 text-gray-600 space-y-5">
-                {data[key].emissionByLevel.map((levelData) => (
+                {data[key].emissionByLevel.map((levelData, levelIndex) => (
                   <li key={levelData.level}>
                     <b>{levelData.level}</b> <br />
-                    {levelData.emission}
+                    {(totalPowerByLevel[levelIndex] * 0.78).toFixed(2)}
                   </li>
                 ))}
               </ul>
@@ -134,6 +140,53 @@ function WhatYouCanDo() {
   );
 }
 
+// function WhatIWantToChange() {
+//   const [selectedOption, setSelectedOption] = useState(null);
+//   const [showConfirm, setShowConfirm] = useState(false);
+
+//   const handleButtonClick = (index) => {
+//     setSelectedOption(index);
+//     setShowConfirm(true);
+//   };
+
+//   const handleConfirm = () => {
+//     setShowConfirm(false);
+//   };
+
+//   return (
+//     <div className="isolate mx-auto mt-8 grid grid-cols-1 gap-8 items-center justify-center">
+//       <div className="flex flex-col rounded-3xl p-6 bg-white border border-gray-200 justify-center items-center">
+//         <p className="text-xl">
+//           What improvement would you make to the building?
+//         </p>
+//         <div className="mt-4 space-x-4 flex flex-row justify-center items-center">
+//           {savingOptions.Improvement.map((improvement, index) => (
+//             <button
+//               key={index}
+//               className={`rounded-lg py-2 px-4 ${
+//                 selectedOption === index
+//                   ? "bg-indigo-500 text-white"
+//                   : "border-2 border-indigo bg-white"
+//               } hover:bg-indigo-700`}
+//               onClick={() => handleButtonClick(index)}
+//             >
+//               {improvement}
+//             </button>
+//           ))}
+//         </div>
+//         {selectedOption !== null && showConfirm && (
+//           <button
+//             className="w-[20%] rounded-lg py-2 px-4 mt-4 bg-white-500 border-2 border-white text-black hover:bg-black hover:text-white"
+//             onClick={handleConfirm}
+//           >
+//             Confirm 👌🏼
+//           </button>
+//         )}
+//       </div>
+//     </div>
+//   );
+// }
+
 function WhatIWantToChange() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -150,20 +203,30 @@ function WhatIWantToChange() {
   return (
     <div className="isolate mx-auto mt-8 grid grid-cols-1 gap-8 items-center justify-center">
       <div className="flex flex-col rounded-3xl p-6 bg-white border border-gray-200 justify-center items-center">
-        <p className="text-xl">What improvement would you make to the building?</p>
+        <p className="text-xl">
+          What improvement would you make to the building?
+        </p>
         <div className="mt-4 space-x-4 flex flex-row justify-center items-center">
           {savingOptions.Improvement.map((improvement, index) => (
-            <button
-              key={index}
-              className={`rounded-lg py-2 px-4 ${
-                selectedOption === index
-                  ? "bg-indigo-500 text-white"
-                  : "border-2 border-indigo bg-white"
-              } hover:bg-indigo-700`}
-              onClick={() => handleButtonClick(index)}
-            >
-              {improvement}
-            </button>
+            <div key={index} className="text-center">
+              <div className="mb-5">
+                <button
+                  className={`rounded-lg py-2 px-4 ${
+                    selectedOption === index
+                      ? "bg-indigo-500 text-white"
+                      : "border-2 border-indigo bg-white"
+                  } hover:bg-indigo-700`}
+                  onClick={() => handleButtonClick(index)}
+                >
+                  {improvement.method}
+                </button>
+              </div>
+              <div className="mt-5 flex justify-center items-center">
+                {selectedOption === index && (
+                  <div className="text-gray-600">{improvement.savings}</div>
+                )}
+              </div>
+            </div>
           ))}
         </div>
         {selectedOption !== null && showConfirm && (
@@ -180,10 +243,14 @@ function WhatIWantToChange() {
 }
 
 export default function Calculator() {
+  const location = useLocation();
+  const { totalPowerByLevel, totalPower } = location.state;
+
+  const [openPopUp, setOpenPopUp] = useState(false);
+
   const [selectedOption, setSelectedOption] = useState(
     calculatorData.options[0]
   );
-  const [openPopUp, setOpenPopUp] = useState(false);
 
   const showWhatYouCanChange = selectedOption === calculatorData.options[0];
   const showWhatYouCanDo = selectedOption === calculatorData.options[1];
@@ -233,7 +300,13 @@ export default function Calculator() {
             </div>
           </div>
           {/* Render data */}
-          {openPopUp && <RenderData data={selectedOption.data} />}
+          {openPopUp && (
+            <RenderData
+              data={selectedOption.data}
+              totalPower={totalPower}
+              totalPowerByLevel={totalPowerByLevel}
+            />
+          )}
           {openPopUp && showWhatYouCanChange && <WhatIWantToChange />}
           {openPopUp && showWhatYouCanDo && <WhatYouCanDo />}
         </div>
