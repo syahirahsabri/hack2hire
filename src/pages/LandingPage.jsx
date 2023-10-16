@@ -6,7 +6,7 @@ export default function LandingPage() {
       style={{
         position: "relative",
         minHeight: "100vh",
-        backgroundColor: "transparent", // Set the background color of the main container to transparent
+        backgroundColor: "transparent", 
       }}
       className="bg-white flex flex-col justify-center items-center"
     >
@@ -18,16 +18,14 @@ export default function LandingPage() {
           width: "100%",
           height: "100%",
           zIndex: -1,
-          backgroundImage: `url(src/assets/water.jpg)`,
+          backgroundImage: `url(src/assets/bg.jpeg)`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          filter: "blur(10px)", // Apply the blur effect here
+          // filter: "blur(2px)",
         }}
       />
-      <main 
-        className="isolate bg-white p-14 rounded-lg border border-gray-300 shadow-lg"
-      >
+      <main className="isolate bg-white p-14 rounded-lg border border-gray-300 shadow-xl outline-dotted outline-2 outline-offset-2 outline-white">
         <div className=" mt-4 px-6 lg:px-8">
           <div className=" mx-auto max-w-2xl text-center">
             <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-4xl">
